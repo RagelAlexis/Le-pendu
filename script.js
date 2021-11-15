@@ -39,7 +39,20 @@ myKeyboard.addEventListener("click", (e) => {
     if (e.target.nodeName == "BUTTON") {
         console.log(e.target.textContent);
     }
-})
+});
+
+
+function manger(dennis) {
+    document.getElementById(`indexLetterTest${dennis}`).innerText = "z";
+};
+
+manger(0);
+manger(1);
+manger(2);
+
+
+
+
 
 
 
