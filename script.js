@@ -14,7 +14,7 @@ let pet = petList[aleaNb(0, petList.length)];
 console.log(pet);
 
 const arrayPet = pet.split("");
-
+console.log(arrayPet);
 arrayPet.forEach((element, index) => {
     let myIndex = index;
     let myCase = `<div class="myLetter border border-dark col-lg-1 col-1 rounded text-center" id="indexLetter${myIndex}">_</div>`;
@@ -35,20 +35,46 @@ function aleaNb(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 };
 
+let nbLetter = 0;
+let life = 10;
+
+
+
 myKeyboard.addEventListener("click", (e) => {
+    // console.log(e);
     if (e.target.nodeName == "BUTTON") {
-        console.log(e.target.textContent);
+        let myScore = nbLetter
+        console.log(e.target.innerText);
+        e.target.className = "m-2 btn btn-primary col-2";
+        e.target.disabled = true;
+        arrayPet.forEach((element, index) => {
+            if (e.target.innerText.toLowerCase() == element) {
+                document.getElementById(`indexLetter${index}`).innerText = element;
+                nbLetter++;
+            }
+        })
+
+        if (nbLetter == arrayPet.length) {
+            confirm("Gagner, voulez-vous rejouer ?");
+        }
+
+        if (myScore == nbLetter) {
+            life--
+        }
+        console.log(life);
+        switch (life) {
+            case 0:
+                confirm("Gros noob, voulez-vous rejouer ?");
+                break;
+            case 5:
+                alert("Il vous reste 5 vies!!");
+                break;
+            default:
+                break;
+        }
     }
 });
 
-
-function manger(dennis) {
-    document.getElementById(`indexLetterTest${dennis}`).innerText = "z";
-};
-
-manger(0);
-manger(1);
-manger(2);
 
 
 
