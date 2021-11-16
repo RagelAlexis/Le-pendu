@@ -1,20 +1,23 @@
+let play = true;
 const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const myKeyboard = document.getElementById("myKeyboard");
 const petName = document.getElementById("petName");
 const petList = [
-    "crevette",
-    "pingouin",
-    "ecureuil",
-    "babouin",
-    "galinette",
-    "sanglier"
+    "hippopotame",
+    "girafe",
+    "buffle",
+    "canard",
+    "cochon",
+    "poule",
+    "hippocampe"
 ];
 
 let pet = petList[aleaNb(0, petList.length)];
-console.log(pet);
+
 
 const arrayPet = pet.split("");
-console.log(arrayPet);
+//? console log pour tricher
+// console.log(arrayPet);
 arrayPet.forEach((element, index) => {
     let myIndex = index;
     let myCase = `<div class="myLetter border border-dark col-lg-1 col-1 rounded text-center" id="indexLetter${myIndex}">_</div>`;
@@ -36,13 +39,13 @@ function aleaNb(min, max) {
 };
 
 let nbLetter = 0;
-let life = 10;
+let life = 8;
 
 
 
 myKeyboard.addEventListener("click", (e) => {
     // console.log(e);
-    if (e.target.nodeName == "BUTTON") {
+    if (e.target.nodeName == "BUTTON" && play === true) {
         let myScore = nbLetter
         console.log(e.target.innerText);
         e.target.className = "m-2 btn btn-primary col-2";
@@ -55,19 +58,43 @@ myKeyboard.addEventListener("click", (e) => {
         })
 
         if (nbLetter == arrayPet.length) {
-            confirm("Gagner, voulez-vous rejouer ?");
+            if (confirm("Gagné, voulez-vous rejouer ?")) {
+                location.reload();
+            }
+            play = false;
         }
 
         if (myScore == nbLetter) {
-            life--
+            life--;
         }
-        console.log(life);
         switch (life) {
             case 0:
-                confirm("Gros noob, voulez-vous rejouer ?");
+                document.getElementById("myLife").innerHTML = ""
+                if (confirm("Gros noob, voulez-vous rejouer ?")) {
+                    location.reload();
+                };
+                play = false;
+                break;
+            case 7:
+                document.getElementById("myLife").innerHTML = "❤️❤️❤️❤️❤️❤️❤️"
+                break;
+            case 6:
+                document.getElementById("myLife").innerHTML = "❤️❤️❤️❤️❤️❤️"
                 break;
             case 5:
-                alert("Il vous reste 5 vies!!");
+                document.getElementById("myLife").innerHTML = "❤️❤️❤️❤️❤️"
+                break;
+            case 4:
+                document.getElementById("myLife").innerHTML = "❤️❤️❤️❤️"
+                break;
+            case 3:
+                document.getElementById("myLife").innerHTML = "❤️❤️❤️"
+                break;
+            case 2:
+                document.getElementById("myLife").innerHTML = "❤️❤️"
+                break;
+            case 1:
+                document.getElementById("myLife").innerHTML = "❤️"
                 break;
             default:
                 break;
